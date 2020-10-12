@@ -23,7 +23,7 @@ struct linked_list* createEmptyList()
 void insert(struct linked_list* list, char* data)
 {
 	struct node* new_node = (struct node*)malloc(sizeof(node));
-	new_node->data = (char*)malloc(sizeof(data));
+	new_node->data = (char*)malloc(sizeof(char));
 	strcpy(new_node->data, data);
 
 	if(!list->head)
