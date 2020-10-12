@@ -20,10 +20,10 @@ struct linked_list* createEmptyList()
 	return list;
 }
 
-void insert(struct linked_list* list, char* data, int len)
+void insert(struct linked_list* list, char* data)
 {
 	struct node* new_node = (struct node*)malloc(sizeof(node));
-	new_node->data = (char*)malloc(len*sizeof(char));
+	new_node->data = (char*)malloc(sizeof(data));
 	strcpy(new_node->data, data);
 
 	if(!list->head)
