@@ -1,4 +1,4 @@
-#include "commonlibs.h"
+#include "utils.h"
 
 typedef struct node
 {
@@ -40,13 +40,15 @@ void insert(struct linked_list* list, char* data)
 	}
 }
 
-void display(struct linked_list* list)
+void printList(struct linked_list* list)
 {
 	struct node* temp = list->head;
 
 	while(temp)
 	{
-		printf("%s\n", temp->data);
+		printf("%s ", temp->data);
 		temp = temp->next;
 	}
+
+	// printf("\n");
 }
