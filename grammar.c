@@ -36,7 +36,7 @@ struct rule* createRule(char* line)
 	return new_rule;
 }
 
-struct grammar* createGrammar(char* filename)
+void readGrammar(char* filename, struct grammar** G)
 {
 	struct grammar* g = (struct grammar*)malloc(sizeof(struct grammar));
 
@@ -58,8 +58,8 @@ struct grammar* createGrammar(char* filename)
 		g->rules[i] = createRule(line);
 	}
 
+	*G = g;
 	fclose(fp);
-	return g;
 }
 
 void printRule(struct rule* r)
