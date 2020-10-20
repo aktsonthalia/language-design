@@ -6,7 +6,7 @@ char delimiter[2] = " ";
 typedef struct rule
 {
 	char* left;
-	struct linked_list* right;
+	struct linkedList* right;
 } rule;
 
 typedef struct grammar

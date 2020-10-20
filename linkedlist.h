@@ -1,9 +1,9 @@
 struct node;
-struct linked_list;
+struct linkedList;
 
-extern struct linked_list* createEmptyList();
+extern struct linkedList* createEmptyList();
 
-extern void insert(struct linked_list* list, char* data);
+extern void insert(struct linkedList* list, char* data);
 
-extern void printList(struct linked_list* list);
+extern void printList(struct linkedList* list);
 

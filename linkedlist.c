@@ -6,21 +6,21 @@ typedef struct node
 	struct node* next;
 } node;
 
-typedef struct linked_list
+typedef struct linkedList
 {
 	struct node* head;
-} linked_list;
+} linkedList;
 
-struct linked_list* createEmptyList()
+struct linkedList* createEmptyList()
 {
-	struct linked_list* list;
-	list = (struct linked_list*)malloc(sizeof(struct linked_list));
+	struct linkedList* list;
+	list = (struct linkedList*)malloc(sizeof(struct linkedList));
 	list->head = NULL;
 
 	return list;
 }
 
-void insert(struct linked_list* list, char* data)
+void insert(struct linkedList* list, char* data)
 {
 	struct node* new_node = (struct node*)malloc(sizeof(node));
 	new_node->data = (char*)malloc((strlen(data)+1) * sizeof(char));
@@ -40,7 +40,7 @@ void insert(struct linked_list* list, char* data)
 	}
 }
 
-void printList(struct linked_list* list)
+void printList(struct linkedList* list)
 {
 	struct node* temp = list->head;
 
