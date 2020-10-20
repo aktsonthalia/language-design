@@ -1,0 +1,39 @@
+<program> <k_program> <par_open> <par_close> <curl_open> <statement_list> <curl_close>
+
+<k_program> program
+<par_open> (
+<par_close> )
+<curl_open> {
+<curl_close> } 
+
+<statement_list> <dec_list> <assn_list>
+
+<dec_list> <dec> <dec_list>
+<dec_list> <dec>
+
+<assn_list> <assn> <assn_list>
+<assn_list> <assn>
+
+<dec> <k_declare> <var_name> <colon> <type> <semicolon>
+<type> -> integer | boolean | real | <array>
+<type> -> integer
+
+<k_declare> declare
+<colon> :
+<semicolon> ;
+
+declare v1 : array [2 .. 5] of integer;
+<dec> <k_declare> <var_name> COLON <type> ;
+<k_declare> list of variables <var_list> COLON <type>;
+<var_list> -> <var_name> <var_name> | <var_name> <var_list>
+<type> -> integer | boolean | real | <array>
+<array> -> <rect_array> | <jagged_array>
+<rect_array> -> array <dimensions> of integer 
+<dimensions> -> SQOP <low>..<high> SQCL <dimensions> | SQOP <low>..<high> SQCL
+<low> -> <static_const> | <expr>
+<high> -> <static_const> | <expr>
+
+‘Declare’ ‘list’ ‘of’ ‘var’ ‘a’ ‘b’ ‘of’ ‘integer’;
+
+‘Integer’ ‘a’ ‘=’ ‘10’;
+<static_const> <- isDigit(lexeme)
