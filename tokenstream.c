@@ -29,6 +29,7 @@ void addToken(tokenStream* t, tokenStreamNode* node)
 	if(t->count==0)
 	{
 		t->head = node;
+		t->count++;
 		return;
 	}
 
@@ -51,8 +52,11 @@ void printToken(tokenStreamNode* node)
 void printTokenStream(tokenStream* t)
 {
 	tokenStreamNode* temp = t->head;
+	// int n = 0;
 	while(temp)
 	{
+		// n++;
+		// printf("printtokenstream %d\n", n);
 		printToken(temp);
 		temp = temp->next;
 	}
