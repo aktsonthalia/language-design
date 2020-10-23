@@ -1,7 +1,6 @@
 #include "utils.h"
 #include "linkedlist.h"
-
-char delimiter[2] = " ";
+#include "grammar.h"
 
 typedef struct rule
 {
@@ -14,6 +13,17 @@ typedef struct grammar
 	struct rule** rules;
 	int size;
 } grammar;
+
+
+struct rule** getRules(struct grammar* g)
+{
+	return g->rules;
+}
+
+struct linkedList* getRight(struct rule* r)
+{
+	return r->right;
+}
 
 struct rule* createRule(char* line)
 {
@@ -54,7 +64,9 @@ void readGrammar(char* filename, struct grammar** G)
 		getline(&line, &len, fp);
 
 		//removing newline character
-		line[strlen(line)-1] = '\0';
+		int idx = strlen(line)-1;
+		if(line[idx] == '\n')
+			line[idx] = '\0';
 		g->rules[i] = createRule(line);
 	}
 

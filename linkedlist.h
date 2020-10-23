@@ -1,9 +1,13 @@
-struct node;
-struct linkedList;
+typedef struct node node;
+typedef struct linkedList linkedList;
 
-extern struct linkedList* createEmptyList();
+struct node* getHead(linkedList* l);
+char* getData(node* n);
+struct node* getNext(node* n);
 
-extern void insert(struct linkedList* list, char* data);
+struct linkedList* createEmptyList();
 
-extern void printList(struct linkedList* list);
+void insert(struct linkedList* list, char* data);
+
+void printList(struct linkedList* list);
 

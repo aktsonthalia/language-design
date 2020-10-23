@@ -60,7 +60,10 @@
 <k_boolean> boolean 
 <k_real> real 
 <k_declare> declare 
+<k_list> list
+<k_of> of
+<k_variables> variables
 <type> <k_integer> 
 <type> <k_boolean> 
 <type> <k_real> 
-<type> <array> 
+<type> <array>
