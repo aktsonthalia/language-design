@@ -19,7 +19,71 @@ typedef struct parseTree
 	parseTreeNode* root;
 } parseTree;
 
-// <dec, 1> --->  
+char* getParseTreeNodeSymb(parseTreeNode p) {
+	return p.symbol;
+}
+void setParseTreeNodeSymb(parseTreeNode p, char* symbol) {
+	p.symbol = symbol;
+}
+int getParseTreeNodeNumChild(parseTreeNode p) {
+	return p.num_children;
+}
+void setParseTreeNodeNumChild(parseTreeNode p, int nc) {
+	p.num_children = nc;
+}
+parseTreeNode** getParseTreeNodeChildren(parseTreeNode p) {
+	return p.children;
+}
+void setParseTreeNodeChildren(parseTreeNode p, parseTreeNode** c) {
+	p.children = c;
+}
+Tag getParseTreeNodeTag(parseTreeNode p) {
+	return p.tag;
+}
+void setParseTreeNodeTag(parseTreeNode p, Tag t) {
+	 p.tag = t;
+}
+char* getParseTreeNodeLexeme(parseTreeNode p) {
+	return p.lexeme;
+}
+void setParseTreeNodeLexeme(parseTreeNode p, char* l) {
+	 p.lexeme = l;
+}
+int getParseTreeNodeLine(parseTreeNode p) {
+	return p.line_number;
+}
+void setParseTreeNodeLine(parseTreeNode p, int ln) {
+	 p.line_number = ln;
+}
+typeinfo* getParseTreeNodeTypeInfo(parseTreeNode p) {
+	return p.type;
+}
+void setParseTreeNodeTypeInfo(parseTreeNode p, typeinfo* t) {
+	p.type = t;
+}
+int getParseTreeNodeDepth(parseTreeNode p) {
+	return p.depth;
+}
+void setParseTreeNodeDepth(parseTreeNode p, int d) {
+	 p.depth = d;
+}
+int getParseTreeNodeRule(parseTreeNode p) {
+	return p.rule;
+}
+void setParseTreeNodeRule(parseTreeNode p, int r) {
+	 p.rule = r;
+}
+typedef struct parseTree
+{
+	parseTreeNode* root;
+} parseTree;
+
+parseTreeNode* getParseTreeRoot(parseTree p) {
+	return p.root;
+}
+void setParseTreeRoot(parseTree p, parseTreeNode* root) {
+	p.root = root;
+}
 
 parseTreeNode* createNode(char* symbol)
 {
