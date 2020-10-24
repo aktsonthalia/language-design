@@ -1,5 +1,8 @@
 #include "grammar.h"
 #include "typeinfo.h"
+#include "parsetree.h"
+#include "utils.h"
+#include "linkedlist.h"
 
 typedef struct parseTreeNode
 {
@@ -9,7 +12,7 @@ typedef struct parseTreeNode
 	enum {terminal, non_terminal} tag;
 	char* lexeme;
 	int line_number;
-	typeinfo* type;
+	typeInfo* type;
 	int depth;
 	int rule;
 }parseTreeNode;
@@ -19,70 +22,77 @@ typedef struct parseTree
 	parseTreeNode* root;
 } parseTree;
 
-char* getParseTreeNodeSymb(parseTreeNode p) {
-	return p.symbol;
-}
-void setParseTreeNodeSymb(parseTreeNode p, char* symbol) {
-	p.symbol = symbol;
-}
-int getParseTreeNodeNumChild(parseTreeNode p) {
-	return p.num_children;
-}
-void setParseTreeNodeNumChild(parseTreeNode p, int nc) {
-	p.num_children = nc;
-}
-parseTreeNode** getParseTreeNodeChildren(parseTreeNode p) {
-	return p.children;
-}
-void setParseTreeNodeChildren(parseTreeNode p, parseTreeNode** c) {
-	p.children = c;
-}
-Tag getParseTreeNodeTag(parseTreeNode p) {
-	return p.tag;
-}
-void setParseTreeNodeTag(parseTreeNode p, Tag t) {
-	 p.tag = t;
-}
-char* getParseTreeNodeLexeme(parseTreeNode p) {
-	return p.lexeme;
-}
-void setParseTreeNodeLexeme(parseTreeNode p, char* l) {
-	 p.lexeme = l;
-}
-int getParseTreeNodeLine(parseTreeNode p) {
-	return p.line_number;
-}
-void setParseTreeNodeLine(parseTreeNode p, int ln) {
-	 p.line_number = ln;
-}
-typeinfo* getParseTreeNodeTypeInfo(parseTreeNode p) {
-	return p.type;
-}
-void setParseTreeNodeTypeInfo(parseTreeNode p, typeinfo* t) {
-	p.type = t;
-}
-int getParseTreeNodeDepth(parseTreeNode p) {
-	return p.depth;
-}
-void setParseTreeNodeDepth(parseTreeNode p, int d) {
-	 p.depth = d;
-}
-int getParseTreeNodeRule(parseTreeNode p) {
-	return p.rule;
-}
-void setParseTreeNodeRule(parseTreeNode p, int r) {
-	 p.rule = r;
-}
-typedef struct parseTree
-{
-	parseTreeNode* root;
-} parseTree;
 
-parseTreeNode* getParseTreeRoot(parseTree p) {
-	return p.root;
+
+char* getParseTreeNodeSymb(parseTreeNode* p) {
+	return p->symbol;
 }
-void setParseTreeRoot(parseTree p, parseTreeNode* root) {
-	p.root = root;
+void setParseTreeNodeSymb(parseTreeNode* p, char* symbol) {
+	p->symbol = symbol;
+}
+int getParseTreeNodeNumChild(parseTreeNode* p) {
+	return p->num_children;
+}
+void setParseTreeNodeNumChild(parseTreeNode* p, int nc) {
+	p->num_children = nc;
+}
+parseTreeNode** getParseTreeNodeChildren(parseTreeNode* p) {
+	return p->children;
+}
+void setParseTreeNodeChildren(parseTreeNode* p, parseTreeNode** c) {
+	p->children = c;
+}
+Tag getParseTreeNodeTag(parseTreeNode* p) {
+	return p->tag;
+}
+void setParseTreeNodeTag(parseTreeNode* p, Tag t) {
+	 p->tag = t;
+}
+char* getParseTreeNodeLexeme(parseTreeNode* p) {
+	return p->lexeme;
+}
+void setParseTreeNodeLexeme(parseTreeNode* p, char* l) {
+	 p->lexeme = l;
+}
+int getParseTreeNodeLine(parseTreeNode* p) {
+	return p->line_number;
+}
+void setParseTreeNodeLine(parseTreeNode* p, int ln) {
+	 p->line_number = ln;
+}
+typeInfo* getParseTreeNodeTypeInfo(parseTreeNode* p) {
+	return p->type;
+}
+void setParseTreeNodeTypeInfo(parseTreeNode* p, typeInfo* t) {
+	p->type = t;
+}
+int getParseTreeNodeDepth(parseTreeNode* p) {
+	return p->depth;
+}
+void setParseTreeNodeDepth(parseTreeNode* p, int d) {
+	 p->depth = d;
+}
+int getParseTreeNodeRule(parseTreeNode* p) {
+	return p->rule;
+}
+void setParseTreeNodeRule(parseTreeNode* p, int r) {
+	 p->rule = r;
+}
+
+
+parseTreeNode* getParseTreeRoot(parseTree* p) {
+	return p->root;
+}
+
+void setParseTreeRoot(parseTree* p, parseTreeNode* root) {
+	p->root = root;
+}
+
+parseTree* createEmptyParseTree()
+{
+	parseTree* t = (parseTree*)malloc(sizeof(parseTree));
+	t->root = NULL;
+	return t;
 }
 
 parseTreeNode* createNode(char* symbol)
@@ -99,20 +109,20 @@ parseTreeNode* createNode(char* symbol)
 void createChildren (parseTreeNode* n, int i,grammar* g)
 {
 	rule* r=getRules(g)[i];
-	linkedList* ll=r->right;
-	node* temp=ll->head;
+	linkedList* ll=getRight(r);
+	node* temp=getHead(ll);
 	while(temp)
 	{
 		// parseTreeNode* child=createNode(temp->data);
 		n->num_children++;
-		temp=temp->next;
+		temp=getNext(temp);
 	}
-	temp=ll->head;
-	n->children=(parseTreeNode**)malloc(sizeof(parseTreeNode*) * (n->num_children))
+	temp=getHead(ll);
+	n->children=(parseTreeNode**)malloc(sizeof(parseTreeNode*) * (getNumChildren(n)));
 	int index=0;
 	while(temp)
 	{
-		parseTreeNode* child=createNode(temp->data);
+		parseTreeNode* child=createNode(getData(temp));
 		n->children[index]=child;
 		temp=temp->next;
 		index++;

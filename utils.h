@@ -13,7 +13,7 @@ char *ltrim(char *s);
 char *rtrim(char *s);
 
 char *trim(char *s);
-void removeSpaces(char *str) ;
+void removeSpaces(char *str);
 
 void createCache();
 

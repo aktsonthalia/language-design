@@ -1,6 +1,7 @@
 #include "utils.h"
 
-char delimiter[] = " ";
+char delimiter[2] = " ";
+
 int countLines(char* filename)
 {
 	FILE* fp = fopen(filename, "r");

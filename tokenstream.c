@@ -50,6 +50,7 @@ tokenStreamNode* getTokenStreamHead(tokenStream s) {
 void setTokenStreamHead(tokenStream s, tokenStreamNode* h) {
 	s.head = h;
 }
+
 tokenStream* createEmptyTokenStream()
 {
 	tokenStream* s= (tokenStream*) malloc(sizeof(tokenStream));
@@ -80,6 +81,7 @@ void addToken(tokenStream* t, tokenStreamNode* node)
 		t->count++;
 		return;
 	}
+	// printToken(node);
 
 	tokenStreamNode* temp = t->head;
 

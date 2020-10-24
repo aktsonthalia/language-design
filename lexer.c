@@ -14,13 +14,14 @@ void tokeniseSourcecode(char* filename, tokenStream* s)
 
 	while (fgets(line,MAXCHAR,FILEIN))
 	{
+	// printf("tokeniseSourcecodee\n");
 		int idx = strlen(line)-1;
 		if(line[idx] == '\n')
 			line[idx] = '\0';
 
 		char *lexeme = strtok(line, " ");
 		
-		removeSpaces(lexeme);
+		// removeSpaces(lexeme);
 
 		while(lexeme != NULL) {
 
@@ -28,6 +29,7 @@ void tokeniseSourcecode(char* filename, tokenStream* s)
 			identify_token(lexeme, &id);
 			tokenStreamNode* node = createTokenStreamNode(id, lexeme, lineNumber);
 			addToken(s, node);
+		// printf("%s\n", lexeme);
       		lexeme = strtok(NULL, " "); //next token
       	}
 
