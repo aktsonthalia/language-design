@@ -1,6 +1,10 @@
-typedef struct rule rule;
+#include "linkedlist.h"
 
-typedef struct grammar grammar;
+#ifndef structures_h
+#define structures_h
+#include "structures.h"
+#endif
+
 
 struct linkedList* getRight(struct rule* r);
 struct rule** getRules(struct grammar* g);

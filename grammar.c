@@ -1,19 +1,5 @@
 #include "utils.h"
-#include "linkedlist.h"
 #include "grammar.h"
-
-typedef struct rule
-{
-	char* left;
-	struct linkedList* right;
-} rule;
-
-typedef struct grammar
-{
-	struct rule** rules;
-	int size;
-} grammar;
-
 
 struct rule** getRules(struct grammar* g)
 {
@@ -61,6 +47,7 @@ void readGrammar(char* filename, struct grammar** G)
 
 	for(int i=0; i<n; i++)
 	{
+		printf("readGrammar\n");
 		getline(&line, &len, fp);
 
 		//removing newline character

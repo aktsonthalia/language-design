@@ -1,35 +1,6 @@
 #include "utils.h"
 #include "linkedlist.h"
 
-typedef struct node
-{
-	char* data;
-	struct node* next;
-} node;
-
-typedef struct linkedList
-{
-	struct node* head;
-} linkedList;
-
-
-struct node* getHead(linkedList* l)
-{
-	return l->head;
-}
-
-struct node* getNext(node* n)
-{
-	return n->next;	
-}
-
-char* getData(node* n)
-{
-	return n->data;
-}
-
-
-
 struct linkedList* createEmptyList()
 {
 	struct linkedList* list;

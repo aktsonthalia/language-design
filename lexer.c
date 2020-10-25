@@ -1,7 +1,7 @@
 #include "utils.h"
 #include "lexer.h"
 
-#define MAXCHAR 1000
+#define MAXCHAR 1000 
 
 void tokeniseSourcecode(char* filename, tokenStream* s)
 {

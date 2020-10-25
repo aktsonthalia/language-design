@@ -1,9 +1,7 @@
-typedef struct node node;
-typedef struct linkedList linkedList;
-
-struct node* getHead(linkedList* l);
-char* getData(node* n);
-struct node* getNext(node* n);
+#ifndef structures_h
+#define structures_h
+#include "structures.h"
+#endif
 
 struct linkedList* createEmptyList();
 

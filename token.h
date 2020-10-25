@@ -1,5 +1,9 @@
 #include "utils.h"
 
+#ifndef structures_h
+#define structures_h
+#include "structures.h"
+#endif
 
 
 typedef struct

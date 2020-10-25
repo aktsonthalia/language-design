@@ -1,56 +1,10 @@
 #include "stack.h"
 #include "utils.h"
 
-typedef struct stackNode 
-{
-	char* symbol;
-	bool isTerminal;
-	struct stackNode* next;
-}stackNode;
-
-typedef struct stack 
-{
-	stackNode* top;
-	int count;
-}stack;
-
-char* getStackNodeSymb(stackNode s) {
-	return s.symbol;
-}
-void setStackNodeSymb(stackNode s, char* sym) {
-	 s.symbol = sym;
-}
-
-bool getStackNodeIsTerm(stackNode s) {
-	return s.isTerminal;
-}
-
-void setStackNodeIsTerm(stackNode s, bool t) {
-	s.isTerminal = t;
-}
-
-stackNode* getStackNodeNext(stackNode s) {
-	return s.next;
-}
-
-void setStackNodeNext(stackNode s, stackNode* sn) {
-	s.next = sn;
-}
-
-stackNode* getStackTop(stack s) {
-	return s.top;
-}
-void setStackTop(stack s, stackNode* top) {
-	s.top = top;
-}
-
-int getStackCount(stack s) {
-	return s.count;
-}
-
-void setStackCount(stack s, int cnt) {
-	s.count = cnt;
-}
+#ifndef structures_h
+#define structures_h
+#include "structures.h"
+#endif
 
 stack* createStack()
 {

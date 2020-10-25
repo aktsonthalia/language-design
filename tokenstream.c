@@ -1,56 +1,6 @@
 #include "utils.h"
 #include "tokenstream.h"
 
-typedef struct tokenStreamNode{
-	token_idx id;
-	char* lexeme;
-	int line_number;
-	struct tokenStreamNode* next;
-}tokenStreamNode;
-
-typedef struct tokenStream{
-	int count;
-	tokenStreamNode* head;
-}tokenStream;
-
-
-token_idx getTokenStreamNodeID(tokenStreamNode t) {
-	return t.id;
-}
-char* getTokenStreamNodeLexeme(tokenStreamNode t) {
-	return t.lexeme;
-}
-int getTokenStreamNodeLine(tokenStreamNode t) {
-	return t.line_number;
-}
-tokenStreamNode* getTokenStreamNodeNext(tokenStreamNode t) {
-	return t.next;
-}
-void setTokenStreamNodeID(tokenStreamNode t, token_idx id) {
-	t.id = id;
-}
-void setTokenStreamNodeLexeme(tokenStreamNode t, char* lex ) {
-	t.lexeme = lex;
-}
-void setTokenStreamNodeLine(tokenStreamNode t, int line) {
-	t.line_number = line;
-}
-void setTokenStreamNodeNext(tokenStreamNode t, tokenStreamNode* n) {
-	t.next = n;
-}
-int getTokenStreamCount(tokenStream s) {
-	return s.count;
-}
-void setTokenStreamCount(tokenStream s, int c) {
-	s.count = c;
-}
-tokenStreamNode* getTokenStreamHead(tokenStream s) {
-	return s.head;
-}
-void setTokenStreamHead(tokenStream s, tokenStreamNode* h) {
-	s.head = h;
-}
-
 tokenStream* createEmptyTokenStream()
 {
 	tokenStream* s= (tokenStream*) malloc(sizeof(tokenStream));
