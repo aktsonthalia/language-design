@@ -1,45 +1,45 @@
 <program> <k_program> <par_open> <par_close> <curl_open> <statement_list> <curl_close> 
 <statement_list> <dec_list> <assn_list> 
 <dec_list> <dec> <dec_list> 
-<dec_list> <dec> 
+<dec_list> <epsilon> 
 <assn_list> <assn> <assn_list> 
-<assn_list> <assn> 
-<dec> <k_declare> <var_name> <colon> <type> <semicolon> 
-<dec> <k_declare> <k_list> <k_of> <k_variables> <var_list> <colon> <type> <semicolon> 
-<var_list> <var_name> <var_name> 
+<assn_list> <epsilon> 
+<dec> declare <decs>
+<decs> list of variables <var_list>
+<decs> <var_name> <colon> <type> <semicolon>
+<var_list> <epsilon> 
 <var_list> <var_name> <var_list> 
 <array> <rect_array> 
 <array> <jagged_array> 
 <rect_array> <k_array> <dimensions> <k_of> <k_integer> 
-<dimensions> <sq_open> <low> <doubledots> <high> <sq_close> 
+<dimensions> <epsilon> 
 <dimensions> <sq_open> <low> <doubledots> <high> <sq_close> <dimensions> 
 <low> <const> 
 <low> <var_name> 
 <high> <const> 
-<high> <var_name> 
-<assn> <var_name> <op_equal> <expr> 
+<high> <var_name>
+<assn> <var_name> <op_equal> <expr>
 <expr> <bool_expr> 
 <expr> <arith_expr> 
 <bool_expr> <bool_term> <op_or> <bool_expr> 
-<bool_expr> <bool_term> 
+<bool_expr> <epsilon>
 <bool_term> <bool_factor> <op_and> <bool_term> 
-<bool_term> <bool_factor> 
+<bool_term> <epsilon> 
 <bool_factor> <var_name> 
 <bool_factor> <arr_mem> 
 <arith_expr> <arith_term> <low_op> <arith_expr> 
-<arith_expr> <arith_term> 
+<arith_expr> <epsilon> 
 <arith_term> <arith_factor> <high_op> <arith_term> 
-<arith_term> <arith_factor> 
+<arith_term> <epsilon> 
 <arith_factor> <var_name> 
 <arith_factor> <const> 
 <arith_factor> <arr_mem> 
-<arr_mem> <var_name> <sq_open> <num_list> <sq_close> 
+<arr_mem> <var_name> <sq_open> <num_list> <sq_close>
 <num_list> <const> <num_list> 
-<num_list> <const> 
+<num_list> <epsilon> 
 <num_list> <var_name> <num_list> 
-<num_list> <var_name> 
 <high_op> <op_mul> <op_div> 
-<low_op> <op_plus> <op_minus> 
+<low_op> <op_plus> <op_minus>
 <op_or> ||| 
 <op_and> &&& 
 <op_mul> * 
@@ -54,7 +54,7 @@
 <sq_open> [ 
 <sq_close> ] 
 <colon> : 
-<semicolon> ; 
+<semicolon> ;
 <k_program> program 
 <k_integer> integer 
 <k_boolean> boolean 
@@ -67,3 +67,14 @@
 <type> <k_boolean> 
 <type> <k_real> 
 <type> <array>
+<jagged_array> <k_jagged> <k_array> <sq_open> <const> <doubledots> <const> <sq_close> <jagged_dim> <of> <k_integer> <sub_dim>  
+<jagged_dim> <epsilon>
+<jagged_dim> <sq_open> <sq_close> <sq_open> <sq_close>
+<sub_dim> <R1> <sq_open> <const> <sq_close> <colon> <size>
+<const> <colon> <curl_open> <full_list> <curl_close>
+<full_list> <epsilon>
+<full_list> <ele_list> <semicolon> <full_list>
+<ele_list> <const> <ele_list>
+<ele_list> <epsilon>
+<k_jagged> jagged
+<R1> R1
