@@ -72,7 +72,7 @@
 <k_list> list
 <k_of> of
 <k_variables> variables
-<type> <k_integer> 
+<type> <k_integer>  
 <type> <k_boolean> 
 <type> <k_real> 
 <type> <array> 
