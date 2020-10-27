@@ -47,7 +47,7 @@ typedef struct parseTreeNode
 	int line_number;
 	typeInfo* type;
 	int depth;
-	int rule;
+	int rule_index;
 }parseTreeNode;
 
 typedef struct parseTree

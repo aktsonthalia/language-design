@@ -9,14 +9,21 @@
 
 parseTree* createEmptyParseTree();
 
-parseTreeNode* createNode(char* symbol);
+parseTreeNode* createNode(char* symbol,tokenStreamNode* t);
 
 void createChildren (parseTreeNode* n, int i,grammar* g);
 
-void deletechildren(parseTreeNode* n);
+void deleteChildren(parseTreeNode* n);
 
-void printParseUtil(parseTreeNode* n,int space);
+void printParsePrettyUtil(parseTreeNode* n,int space);
 
-void printParseTree(parseTreeNode* n);
+void printParseTreePretty(parseTree* tree);
+
+void printParseTree(parseTree* tree);
+void printParseUtil(parseTreeNode* root);
 
 void printParseTreeNode(parseTreeNode* n);
+parseTreeNode* PreOrderSuccessor(parseTree* tree,parseTreeNode* node);
+void PreOrderSuccessorUtil(parseTreeNode* node,int *flag,parseTreeNode** next);
+
+parseTreeNode* createDummyNode(char* symbol);

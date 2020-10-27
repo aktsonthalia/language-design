@@ -26,3 +26,4 @@ void createCache();
 void getNTCache(char* nt, int* a, int* b);
 void strip(char *text);
 void cleanWhiteSpaces(char* filename);
+int isTerminal(char* symbol);

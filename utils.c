@@ -217,3 +217,9 @@ void cleanWhiteSpaces(char* filename)
     fclose(FILEOUT);
     return;
 }
+
+int isTerminal(char* symbol)
+{
+    if(symbol[0]=='<') return 0;
+    return 1;
+}

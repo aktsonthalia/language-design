@@ -9,5 +9,5 @@
 #endif
 
 void createParseTree(parseTree* t, tokenStream* s, grammar* g);
+bool buildParseTree(tokenStreamNode** ptr, parseTree* tree, parseTreeNode* root, stack* st, grammar*g, int* k);
 
-bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k);

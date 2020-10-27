@@ -4,7 +4,6 @@
 
 void createParseTree(parseTree* t, tokenStream* s, grammar* g)
 {
-	printf("createParseTree\n");
 
 	stack* st = createStack();
 
@@ -13,12 +12,20 @@ void createParseTree(parseTree* t, tokenStream* s, grammar* g)
 	tokenStreamNode* ptr = s->head;
 
 	int k = 0;
-	buildParseTree(&ptr, st, g, &k);
+
+	t->root = createDummyNode("<program>");
+	// printf("*******inside createParseTree ***************\n");
+	
+	// printf("*******inside createParseTree ***************\n");
+
+	// printf("inside createParseTree\n");
+
+	buildParseTree(&ptr, t, t->root, st, g, &k);
 
 
 }
 
-bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
+bool buildParseTree(tokenStreamNode** ptr, parseTree* tree, parseTreeNode* root, stack* st, grammar*g, int* k)
 {
 
 	tokenStreamNode* buffer;
@@ -26,10 +33,11 @@ bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
 	if(*ptr == NULL && st->count == 0)
 		return true;
 
-	printf("=====================================================\n");
-	printf("k = %d\n", *k);
-	printStack(st);
-	printToken(*ptr);
+	// printf("=====================================================\n");
+	// printParseTreePretty(tree);
+	// printf("k = %d\n", *k);
+	// printStack(st);
+	// printToken(*ptr);
 
 	stackNode* top = st->top;
 	// printf("%s\n", top->symbol);
@@ -37,7 +45,7 @@ bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
 		!(strcmp(top->symbol, "<var_name>") == 0)
 		&& !(strcmp(top->symbol, "<const>") == 0))
 	{
-		printf("working\n");
+		// printf("working\n");
 		int start, count;
 		getNTCache(top->symbol, &start, &count);
 
@@ -48,12 +56,14 @@ bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
 			// printf("the top of the stack is:\n");
 			// printStackNode(top);
 			ruleReplace(st, g, i, &c);
-			printf("top of stack is, %s\n", st->top->symbol);
-			printf("this non terminal was replaced with %d tokens.\n", c);
+			createChildren(root, i, g);
+			// printf("top of stack is, %s\n", st->top->symbol);
+			// printf("this non terminal was replaced with %d tokens.\n", c);
 
-			if(buildParseTree(ptr, st, g, &c))
+			if(buildParseTree(ptr, tree, PreOrderSuccessor(tree,root), st, g, &c))
 				return true;
 
+			deleteChildren(root);
 			*ptr = buffer;
 			undoRuleReplace(st, top, c);
 		}
@@ -64,10 +74,10 @@ bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
 	else
 	{
 		// printf("terminal\n");
-
 		int t;
+		// printf("inside buildParseTree\n");
 		identify_token((*ptr)->lexeme, &t);
-		printf("%s %s %d\n", (*ptr) -> lexeme, top->symbol, t);
+		// printf("%s %s %d\n", (*ptr) -> lexeme, top->symbol, t);
 
 		if(strcmp((*ptr)->lexeme, top->symbol) == 0 ||
 			(t == 27 && strcmp(top->symbol, "<var_name>") == 0) ||
@@ -77,14 +87,26 @@ bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
 			*ptr = (*ptr)->next;
 			stackNode* temp = pop(st);
 			(*k)--;
+			// createChildren(root, i, g);
+			if(t == 27 || t == 28)
+			{
 
-			if(buildParseTree(ptr, st, g, k))
+				root->children=(parseTreeNode**)(malloc(sizeof(parseTreeNode *)));
+				root->children[0]=createDummyNode(buffer->lexeme);
+				root->num_children=1;
+				root=root->children[0];
+				// root->lexeme=(*ptr)->lexeme;
+
+			}
+
+			if(buildParseTree(ptr, tree, PreOrderSuccessor(tree,root), st, g, k))
 				return true;
 
 			*ptr = buffer;
 
 			push(st, temp);
 			(*k)++;
+			// deleteChildren(root);
 			
 			return false;
 		}
@@ -92,16 +114,12 @@ bool buildParseTree(tokenStreamNode** ptr, stack* st, grammar*g, int* k)
 
 		else 
 		{
-			printf("%s \n", (*ptr)->lexeme);
-			printf("not matching\n");
+			// printf("%s \n", (*ptr)->lexeme);
+			// printf("not matching\n");
 
 			return false;
 		}
 	}
-
-
-
-
 }
 
 
