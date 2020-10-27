@@ -5,13 +5,6 @@
 #include "structures.h"
 #endif
 
-
-typedef struct
-{
-	char* lexeme;
-	char* symbol;
-}token;
-
 extern int numtokens;
 extern token tokens[29];
 

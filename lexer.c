@@ -19,7 +19,11 @@ void tokeniseSourcecode(char* filename, tokenStream* s)
 		if(line[idx] == '\n')
 			line[idx] = '\0';
 
+		if(!line)
+			continue;
+		
 		char *lexeme = strtok(line, " ");
+		strip(lexeme);
 		
 		// removeSpaces(lexeme);
 

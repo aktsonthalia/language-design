@@ -13,6 +13,7 @@ struct linkedList* getRight(struct rule* r)
 
 struct rule* createRule(char* line)
 {
+	// printf("createRule\n");
 	struct rule* new_rule = (struct rule*)malloc(sizeof(struct rule));
 
 	char* token = strtok(line, delimiter);
@@ -42,12 +43,11 @@ void readGrammar(char* filename, struct grammar** G)
 	g->rules = (struct rule**)malloc(n * sizeof(struct rule*));
 
 	FILE* fp = fopen(filename, "r");
-	char* line = NULL;
+	char* line = (char*)malloc(200*sizeof(char));
 	size_t len = 0;
 
 	for(int i=0; i<n; i++)
 	{
-		printf("readGrammar\n");
 		getline(&line, &len, fp);
 
 		//removing newline character
@@ -55,6 +55,7 @@ void readGrammar(char* filename, struct grammar** G)
 		if(line[idx] == '\n')
 			line[idx] = '\0';
 		g->rules[i] = createRule(line);
+		// printf("readGrammar\n");
 	}
 
 	*G = g;

@@ -49,10 +49,10 @@ void identify_token(char* lexeme, int* index)
     char c2[] = "<const>";
 
     if(isdigit(lexeme[0]))
-        *index = numtokens-2;
+        *index = numtokens-1;
 
     else
-        *index = numtokens-1;
+        *index = numtokens-2;
 }
 
 

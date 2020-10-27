@@ -1,5 +1,12 @@
 #include "utils.h"
 
+#ifndef structures_h
+#define structures_h
+#include "structures.h"
+#endif
+
+#define MAXCHAR1 1000
+
 char delimiter[2] = " ";
 
 int countLines(char* filename)
@@ -129,7 +136,7 @@ void createCache()
 
 
 
-void replace(char* nt, int* a, int* b) 
+void getNTCache(char* nt, int* a, int* b) 
 {
  // pass reference of integer when calling the function.
             char* realToken;
@@ -146,4 +153,67 @@ void replace(char* nt, int* a, int* b)
                 FILE *fp = fopen(fPath, "r");
                 fscanf(fp, "%d %d", a, b);
                 fclose(fp);
+}
+
+void strip(char *text)
+{
+  int count1=0,count2=0;
+
+  while(text[count1]!='\0')
+  {
+    if(text[count1]!=' ' || text[count1] != '\t')
+    {
+      text[count2]=text[count1];
+      count2++;
+    }
+    count1++;
+  }
+  text[count2]='\0';
+  return;
+}
+
+void cleanWhiteSpaces(char* filename)
+{
+    FILE* FILEIN = fopen(filename, "r");
+    FILE* FILEOUT=fopen("processed.txt","w");
+    char line[MAXCHAR1];
+
+    while (fgets(line,MAXCHAR1,FILEIN))
+    {
+
+        int count1=0;
+        int count2=0;
+        while(line[count1]==' ' || line[count1]=='\t')
+        {
+            count1++;
+        }
+        char buffer[MAXCHAR1];
+
+        while(line[count1+1]!='\0')
+        {
+            if((line[count1]==' ' && line[count1+1]==' '))
+            {
+                // count1++;
+                // continue;
+            }
+            else if((line[count1]=='\t'))
+            {
+
+            }
+            else
+            {
+                buffer[count2]=line[count1];
+                count2++;
+            }
+
+        count1++;
+
+        }
+        buffer[count2]='\0';
+        fprintf(FILEOUT, "%s\n",buffer); 
+
+    }
+    fclose(FILEIN);
+    fclose(FILEOUT);
+    return;
 }

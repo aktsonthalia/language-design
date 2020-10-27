@@ -6,6 +6,12 @@
 #include <sys/stat.h>
 #include <limits.h>
 
+#ifndef structures_h
+#define structures_h
+#include "structures.h"
+#endif
+
+
 extern char delimiter[];
 extern int countLines(char* filename);
 char *ltrim(char *s);
@@ -17,4 +23,6 @@ void removeSpaces(char *str);
 
 void createCache();
 
-void replace(char* nt, int* a, int* b);
+void getNTCache(char* nt, int* a, int* b);
+void strip(char *text);
+void cleanWhiteSpaces(char* filename);

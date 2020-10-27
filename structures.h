@@ -83,3 +83,9 @@ typedef struct tokenStream{
 	tokenStreamNode* head;
 }tokenStream;
 
+
+typedef struct
+{
+	char* lexeme;
+	char* symbol;
+}token;

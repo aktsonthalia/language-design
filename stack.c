@@ -66,14 +66,14 @@ stackNode* ruleReplace(stack* s, struct grammar* g, int i, int* count)
 {
 	stackNode* top = pop(s);
 
-	node* temp = getHead(getRight((getRules(g))[i]));
+	node* temp = g->rules[i]->right->head;
 	stack* buffer = createStack();
 
 	while(temp)
 	{
-		stackNode* newnode = createStackNode(getData(temp));
+		stackNode* newnode = createStackNode(temp->data);
 		push(buffer, newnode);
-		temp = getNext(temp);
+		temp = temp->next;
 		(*count)++;
 	}
 

@@ -5,30 +5,26 @@
 #include "linkedlist.h"
 #include "parsetree.h"
 #include "typeinfo.h"
-
+#include "parser.h"
 
 int main()
 {
-
-	// linkedList* l = createEmptyList();
-	// insert(l, "token1");
-	// insert(l, "token1");
-	// insert(l, "token1");
-	// insert(l, "token1");
-	
-	// printList(l);
+	createCache();
+	printf("main");
 	struct grammar* g;
 	char grammar_file[] = "grammar.txt";
 	readGrammar(grammar_file, &g);
-	printGrammar(g);
+	// printGrammar(g);
 
-	printf("=======================================================\n");
-	
+	cleanWhiteSpaces("testcases/t4.txt");
 	tokenStream* s = createEmptyTokenStream();
-	char source_file[] = "source.txt";
+	char source_file[] = "processed.txt";
 	tokeniseSourcecode(source_file, s);
 	// printf("main\n");
-	printTokenStream(s);
+	// printTokenStream(s);
 
 	parseTree* tree = createEmptyParseTree();
+
+	createParseTree(tree, s, g);
+
 }
