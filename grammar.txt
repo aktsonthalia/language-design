@@ -6,9 +6,18 @@
 <assn_list> <assn> <extra_assn>
 <extra_assn> <assn> <extra_assn> 
 <extra_assn> <epsilon> 
-<dec> declare <decs>
-<decs> list of variables <var_list> <colon> <type> <semicolon>
-<decs> <var_name> <colon> <type> <semicolon>
+<dec> <dec_non_jagged>
+<dec> <dec_jagged>
+<dec_non_jagged> declare <decs_non_jagged>
+<dec_jagged> declare <decs_jagged>
+<decs_non_jagged> list of variables <var_list> <colon> <non_jagged_type> <semicolon>
+<decs_non_jagged> <var_name> <colon> <non_jagged_type> <semicolon>
+<non_jagged_type> <k_integer>
+<non_jagged_type> <k_boolean>
+<non_jagged_type> <k_real>
+<non_jagged_type> <rect_array>
+<decs_jagged> list of variables <var_list> <colon> <jagged_array> 
+<decs_jagged> <var_name> <colon> <jagged_array> 
 <var_list> <var_name> <extra_var> 
 <extra_var> <var_name> <extra_var>
 <extra_var> <epsilon> 
@@ -22,6 +31,7 @@
 <high> <const> 
 <high> <var_name>
 <assn> <var_name> <op_equal> <expr> <semicolon>
+<assn> <arr_mem> <op_equal> <expr> <semicolon>
 <expr> <bool_expr> 
 <expr> <arith_expr> 
 <bool_expr> <bool_term> <extra_bool_expr>
@@ -76,15 +86,28 @@
 <type> <k_boolean> 
 <type> <k_real> 
 <type> <array> 
-<jagged_array> <k_jagged> <k_array> <sq_open> <const> <doubledots> <const> <sq_close> <jagged_dim> <of> <k_integer>
-<jagged_dim> <epsilon>
-<jagged_dim> <sq_open> <sq_close> <sq_open> <sq_close>
-<sub_dim> <R1> <sq_open> <const> <sq_close> <colon> <size>
-<const> <colon> <curl_open> <full_list> <curl_close>
-<full_list> <epsilon>
-<full_list> <ele_list> <semicolon> <full_list>
-<ele_list> <const> <ele_list>
-<ele_list> <epsilon>
+<k_size> size
+<k_array> array
+<doubledots> .. 
+<epsilon> 
+<jagged_array> <jagged_array_A> <jagged_array_B>
+<jagged_array_A> <k_jagged> <k_array> <sq_open> <const> <doubledots> <const> <sq_close>
+<jagged_array_B> <jagged_dim> <k_of> <k_integer> <semicolon> <sub_dim_list>
+<jagged_dim> <2d>
+<jagged_dim> <3d>
+<2d> <sq_open> <sq_close>
+<3d> <sq_open> <sq_close> <sq_open> <sq_close>
+<sub_dim_list> <sub_dim> <extra_sub_dims>
+<extra_sub_dims> <sub_dim> <extra_sub_dims>
+<extra_sub_dims> <epsilon>
+<sub_dim> <sub_dim_A> <sub_dim_B>
+<sub_dim_A> <R1> <sq_open> <const> <sq_close> <colon> <k_size> <const>
+<sub_dim_B> <colon> values <curl_open> <full_list> <curl_close>
+<full_list> <ele_list> <extra_lists>
+<extra_lists> <semicolon> <ele_list> <extra_lists>
+<extra_lists> <epsilon>
+<ele_list> <const> <extra_nums>
+<extra_nums> <const> <extra_nums>
+<extra_nums> <epsilon>
 <k_jagged> jagged
 <R1> R1
-<epsilon> 
