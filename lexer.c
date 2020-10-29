@@ -1,3 +1,15 @@
+/* 
+
+Group: 45
+
+Members:
+
+V. Aravindan 		: 		2017B4A70849P
+Ankit Sonthalia 	:		2017B4A70468P
+Rohit K Bharadwaj   :		2017B4A70633P
+Ritik Bavdekar      :     	2017B4A70349P
+
+*/
 #include "utils.h"
 #include "lexer.h"
 
@@ -6,15 +18,14 @@
 void tokeniseSourcecode(char* filename, tokenStream* s)
 {
 	FILE* FILEIN = fopen(filename, "r");
-	// char[1000] line;
-	// fscanf(fptr, "%[^\n]", line);
-	// char *token = strtok(string, " ");
 	char line[MAXCHAR];
 	int lineNumber=1;
 
-	while (fgets(line,MAXCHAR,FILEIN))
+
+	while (fgets(line, MAXCHAR, FILEIN))
 	{
-	// printf("tokeniseSourcecodee\n");
+
+
 		int idx = strlen(line)-1;
 		if(line[idx] == '\n')
 			line[idx] = '\0';
@@ -25,7 +36,6 @@ void tokeniseSourcecode(char* filename, tokenStream* s)
 		char *lexeme = strtok(line, " ");
 		strip(lexeme);
 		
-		// removeSpaces(lexeme);
 
 		while(lexeme != NULL) {
 
@@ -33,7 +43,6 @@ void tokeniseSourcecode(char* filename, tokenStream* s)
 			identify_token(lexeme, &id);
 			tokenStreamNode* node = createTokenStreamNode(id, lexeme, lineNumber);
 			addToken(s, node);
-		// printf("%s\n", lexeme);
       		lexeme = strtok(NULL, " "); //next token
       	}
 

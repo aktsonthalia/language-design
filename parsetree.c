@@ -1,6 +1,18 @@
+/*
+Group: 45
+
+Members:
+
+V. Aravindan 		: 		2017B4A70849P
+Ankit Sonthalia 	:		2017B4A70468P
+Rohit K Bharadwaj   :		2017B4A70633P
+Ritik Bavdekar      :     	2017B4A70349P
+*/
 #include "utils.h"
 #include "parsetree.h"
 #include <strings.h>
+
+int counter = 1;
 
 parseTree* createEmptyParseTree()
 {
@@ -18,7 +30,7 @@ parseTreeNode* createNode(char* symbol,tokenStreamNode * t)
 	temp->line_number = t->line_number;
 	temp->children=NULL;
 	temp->num_children=0;
-	temp->type=NULL;
+	// temp->type=NULL;
 	temp->depth = 0;
 	temp->rule_index = -1;
 	return temp;
@@ -31,7 +43,7 @@ parseTreeNode* createDummyNode(char* symbol)
 	temp->tag=~isTerminal(symbol);
 	temp->children=NULL;
 	temp->num_children=0;
-	temp->type=NULL;
+	// temp->type=NULL;
 	temp->depth =         0;
 	temp->rule_index = -1;
 	temp->line_number=-1;
@@ -85,30 +97,37 @@ void deleteChildren(parseTreeNode* n)
 void printParseTreeNode(parseTreeNode* n)
 {
 	printf("\n");
-	
-	
-	if(n->tag == terminal)
-	{	printf("symbol : %s\t", n->symbol);
-		printf("terminal\t");
-		printf("lexeme :%s \t", n->lexeme);
-		printf("line_number : %d \t", n->line_number);
+	printf("%-4d", counter);
+	printf(" %-25s", n->symbol );
+
+
+	if(isTerminal(n->symbol) || strcmp(n->symbol, "<var_name>") == 0 || strcmp(n->symbol, "<const>") == 0)
+	{
+		printf(" %-35s","terminal");
+		printf(" %-40s", "#######");
+		printf(" %-15s", n->lexeme);
+		printf(" %8d", n->line_number);
+		printf(" %10s", "#######");
 	}
 
 	else
 	{
-		printf("symbol : %s\t", n->symbol);
 		//add type expression print functionality
-		printf("non terminal \t");
-		printf("rule_index : %d\t", n->rule_index);
+		printf(" %-35s","non terminal");
+		printf(" %-40s", "Present In Type Expression Table.");
+		printf(" %-15s", "#######");
+		printf(" %8s", "#######");
+		printf(" %10d", n->rule_index);
 	}
 
-	printf("depth : %d\n", n->depth);
+	printf(" %8d\n", n->depth);
 	return;
 }
 
 
 void printParsePrettyUtil(parseTreeNode* n,int space)
 {
+	printf("\n");
 	if(n==NULL) return;
 	for(int i=0;i<space;i++)
 	{
@@ -134,6 +153,7 @@ void printParseUtil(parseTreeNode* root)
 {
 	if(root==NULL) return;
 	printParseTreeNode(root);
+	counter++;
 	for(int i=0;i<root->num_children;i++)
 	{
 		printParseUtil(root->children[i]);
@@ -143,7 +163,14 @@ void printParseUtil(parseTreeNode* root)
 
 void printParseTree(parseTree* tree) ///inorder traversal
 {
-	printf("\n ------------------------------------------ \n ");
+	printf("\n");
+		printf("============================================================");
+	printf("============================================================");
+	printf("============================================================\n");
+	printf("%-4s %-25s %-35s %-30s %-15s %10s %10s %8s\n", "S.No","Symbol Name", "Terminal/Non-Terminal", "Type Expression", "Name of Lexeme", "Line No.", "Grammar Rule", "Depth of node");
+		printf("============================================================");
+	printf("============================================================");
+	printf("============================================================\n");
 	printParseUtil(tree->root);
 	printf("\n ------------------------------------------ \n ");
 	return;
@@ -165,7 +192,7 @@ void PreOrderSuccessorUtil(parseTreeNode* node,int *flag,parseTreeNode** next)
 	}
 	return ;
 
-} 
+}
 
 parseTreeNode* PreOrderSuccessor(parseTree* tree,parseTreeNode* node)
 {
@@ -179,5 +206,9 @@ parseTreeNode* PreOrderSuccessor(parseTree* tree,parseTreeNode* node)
 	return next;
 }
 
+void printTest(parseTree* tree)
+{
+
+}
 
 

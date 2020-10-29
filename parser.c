@@ -1,10 +1,22 @@
+/* 
+
+Group: 45
+
+Members:
+
+V. Aravindan 		: 		2017B4A70849P
+Ankit Sonthalia 	:		2017B4A70468P
+Rohit K Bharadwaj   :		2017B4A70633P
+Ritik Bavdekar      :     	2017B4A70349P
+
+*/
 #include "parser.h"
 #include "stack.h"
 #include "utils.h"
 
 void createParseTree(parseTree* t, tokenStream* s, grammar* g)
-{
-
+{	
+	printf("Creating parse tree...\n");
 	stack* st = createStack();
 
 	push(st, createStackNode("<program>"));
@@ -21,7 +33,7 @@ void createParseTree(parseTree* t, tokenStream* s, grammar* g)
 	// printf("inside createParseTree\n");
 
 	buildParseTree(&ptr, t, t->root, st, g, &k);
-
+	printf("Parse Tree created successfully.\n");
 
 }
 
@@ -57,6 +69,7 @@ bool buildParseTree(tokenStreamNode** ptr, parseTree* tree, parseTreeNode* root,
 			// printStackNode(top);
 			ruleReplace(st, g, i, &c);
 			createChildren(root, i, g);
+			root->rule_index = i;
 			// printf("top of stack is, %s\n", st->top->symbol);
 			// printf("this non terminal was replaced with %d tokens.\n", c);
 
@@ -95,9 +108,12 @@ bool buildParseTree(tokenStreamNode** ptr, parseTree* tree, parseTreeNode* root,
 				root->children[0]=createDummyNode(buffer->lexeme);
 				root->num_children=1;
 				root=root->children[0];
+				root->line_number = buffer->line_number;
 				// root->lexeme=(*ptr)->lexeme;
 
 			}
+				root->lexeme = (char*)malloc(sizeof(char) * strlen(buffer->lexeme));
+				strcpy(root->lexeme, buffer->lexeme);
 
 			if(buildParseTree(ptr, tree, PreOrderSuccessor(tree,root), st, g, k))
 				return true;

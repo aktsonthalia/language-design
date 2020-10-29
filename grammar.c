@@ -1,3 +1,15 @@
+/* 
+
+Group: 45
+
+Members:
+
+V. Aravindan 		: 		2017B4A70849P
+Ankit Sonthalia 	:		2017B4A70468P
+Rohit K Bharadwaj   :		2017B4A70633P
+Ritik Bavdekar      :     	2017B4A70349P
+
+*/
 #include "utils.h"
 #include "grammar.h"
 
@@ -13,7 +25,6 @@ struct linkedList* getRight(struct rule* r)
 
 struct rule* createRule(char* line)
 {
-	// printf("createRule\n");
 	struct rule* new_rule = (struct rule*)malloc(sizeof(struct rule));
 
 	char* token = strtok(line, delimiter);
@@ -50,12 +61,10 @@ void readGrammar(char* filename, struct grammar** G)
 	{
 		getline(&line, &len, fp);
 
-		//removing newline character
 		int idx = strlen(line)-1;
 		if(line[idx] == '\n')
 			line[idx] = '\0';
 		g->rules[i] = createRule(line);
-		// printf("readGrammar\n");
 	}
 
 	*G = g;

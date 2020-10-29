@@ -89,7 +89,7 @@
 <k_size> size
 <k_array> array
 <doubledots> .. 
-<epsilon> 
+<epsilon>
 <jagged_array> <jagged_array_A> <jagged_array_B>
 <jagged_array_A> <k_jagged> <k_array> <sq_open> <const> <doubledots> <const> <sq_close>
 <jagged_array_B> <jagged_dim> <k_of> <k_integer> <semicolon> <sub_dim_list>

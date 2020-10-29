@@ -1,5 +1,18 @@
+/* 
+
+Group: 45
+
+Members:
+
+V. Aravindan 		: 		2017B4A70849P
+Ankit Sonthalia 	:		2017B4A70468P
+Rohit K Bharadwaj   :		2017B4A70633P
+Ritik Bavdekar      :     	2017B4A70349P
+
+*/
 #include "utils.h"
 
+#define typeTableSize 500
 typedef struct rule
 {
 	char* left;
@@ -23,19 +36,6 @@ typedef struct linkedList
 	struct node* head;
 } linkedList;
 
-typedef struct typeInfo
-{
-	char* varname;
-	enum {primitive, rect_array, jagged_array} tag;
-	enum {not_applicable, static_, dynamic} init;  
-
-	// union 
-	// {
-	// //populate later
-	// }typeExp;
-
-}typeInfo;
-
 typedef enum {terminal, non_terminal} Tag;
 typedef struct parseTreeNode
 {
@@ -45,7 +45,7 @@ typedef struct parseTreeNode
 	Tag tag;
 	char* lexeme;
 	int line_number;
-	typeInfo* type;
+	//typeInfo add
 	int depth;
 	int rule_index;
 }parseTreeNode;
@@ -89,3 +89,70 @@ typedef struct
 	char* lexeme;
 	char* symbol;
 }token;
+
+typedef struct range_node{
+  int low;
+  int hi;
+  struct range_node* next;
+}rect_range_node;
+
+typedef struct twoDNode
+{
+  int size_value;
+  struct twoDNode* next;
+}twoDNode;
+
+typedef struct threeDNode
+{
+  int twoDSizes;
+  struct twoDNode* threeDSizes;
+  struct threeDNode* next;
+}threeDNode;
+
+typedef union
+{
+  twoDNode* head_2d;
+  threeDNode* head_3d;
+}range2;
+
+typedef struct{
+char* typeExp_type;
+int dimensions;
+int range1[2];
+char* basicElementType;
+range2 r2; //tagged with dimensions r2 is union type
+}JaggedArrayTypeExp; //variant record tag: dimensions
+
+typedef struct{
+  char* typeExp_type;
+  int dimensions;
+  rect_range_node* head; //populate on fly all the dimension into a LinkedList
+  char* basicElementType;//fixed
+}RectArrayTypeExp; //fixed
+
+typedef struct{
+  char* basicElementType;
+}PrimitiveTypeExp;
+
+typedef union
+{
+  PrimitiveTypeExp p;
+  RectArrayTypeExp r;
+  JaggedArrayTypeExp j;
+}typeExpression;
+
+typedef struct{
+  char* variable_name;
+  enum {primitive,rectangular,jagged} t;
+  enum {dyn,static_var,not_applicable} stat;
+  typeExpression* te; //tagged with type
+}typeExpressionTableEntry; //variant record tag: type
+
+typedef struct typeExpressionTable
+{
+	typeExpressionTableEntry** entries;
+	int size;
+} typeExpressionTable;
+
+//equality check
+//print typeExpression
